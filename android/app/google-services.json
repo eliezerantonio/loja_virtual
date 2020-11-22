@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "918547887552",
+    "firebase_url": "https://lojavirtual-a738c.firebaseio.com",
+    "project_id": "lojavirtual-a738c",
+    "storage_bucket": "lojavirtual-a738c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918547887552:android:2b2798f5fcbe43a8680425",
+        "android_client_info": {
+          "package_name": "com.eliezer.loja_virtual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "918547887552-9q3tsvak81oac5lka2r7gsc2iknkb9oo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf-XZPp8_H1BoCQR9lRJfCVBfowB-dtEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918547887552-9q3tsvak81oac5lka2r7gsc2iknkb9oo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
