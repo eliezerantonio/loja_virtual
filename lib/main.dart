@@ -11,10 +11,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Loja virtual",
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       
        accentColor: Colors.black54,
-        primaryColor: Color.fromARGB(255, 4, 125, 141)
+        primaryColor: Colors.green
       ),
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
