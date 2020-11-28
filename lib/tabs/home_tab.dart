@@ -7,7 +7,7 @@ class HomeTab extends StatelessWidget {
   Widget _buildBodyBack() => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [Colors.lightGreen, Colors.lightGreen],
+              colors: [Colors.green[700], Colors.green[700]],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight),
         ),
@@ -41,8 +41,10 @@ class HomeTab extends StatelessWidget {
                     child: Container(
                       height: 200,
                       alignment: Alignment.center,
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
                       ),
                     ),
                   );
