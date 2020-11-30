@@ -16,6 +16,7 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+
       children: [
         _buildBodyBack(),
         CustomScrollView(
@@ -38,10 +39,12 @@ class HomeTab extends StatelessWidget {
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return SliverToBoxAdapter(
-                    child: Container(
-                      height: 200,
-                      alignment: Alignment.center,
-                      child: Center(
+                    child: Center(
+
+                      child: Container(
+
+                        height: 200,
+                        alignment: Alignment.center,
                         child: CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                         ),

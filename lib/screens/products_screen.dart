@@ -45,22 +45,30 @@ class ProductsScreen extends StatelessWidget {
                     GridView.builder(
                       padding: EdgeInsets.all(4),
                       itemBuilder: (BuildContext context, int index) {
-                        return ProductTile("grid",ProductData.fromDocument(snapshot.data.documents[index]));
+                        return ProductTile(
+                            "grid",
+                            ProductData.fromDocument(
+                                snapshot.data.documents[index]));
                       },
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           mainAxisSpacing: 4,
-                          crossAxisSpacing: 4, childAspectRatio: 0.65),
+                          crossAxisSpacing: 4,
+                          childAspectRatio: 0.65),
                       itemCount: snapshot.data.documents.length,
                     ),
                     //LIST
-                   ListView.builder(
-                     padding: EdgeInsets.all(4.0),
-                     itemCount: snapshot.data.documents.length,
-                     itemBuilder:(context, index){
-                       return ProductTile("list",ProductData.fromDocument(snapshot.data.documents[index]));
-                     },
-                   )
+                    ListView.builder(
+                      padding: EdgeInsets.all(4.0),
+                      itemCount: snapshot.data.documents.length,
+                      itemBuilder: (context, index) {
+                        return ProductTile(
+                          "list",
+                          ProductData.fromDocument(
+                              snapshot.data.documents[index]),
+                        );
+                      },
+                    )
                   ],
                 );
               }
