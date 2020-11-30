@@ -56,7 +56,7 @@ class ProductTile extends StatelessWidget {
                 children: [
 
                   Flexible(
-                    flex: 1,
+                    flex: 2,
                     child: Image.network(
                       product.images[0],
                       fit: BoxFit.cover,

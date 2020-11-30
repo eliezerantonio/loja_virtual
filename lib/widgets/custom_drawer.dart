@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:loja_virtual/screens/login_screen.dart';
 import 'package:loja_virtual/tiles/drawer_tile.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -7,10 +8,11 @@ class CustomDrawer extends StatelessWidget {
 
   final PageController pageController;
 
-  Widget _buildDrawerBack() => Container(
+  Widget _buildDrawerBack() =>
+      Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [Color.fromARGB(255, 203, 236, 241), Colors.white70],
+              colors: [Color.fromARGB(255, 203, 236, 241), Colors.white70,],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter),
         ),
@@ -52,11 +54,19 @@ class CustomDrawer extends StatelessWidget {
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute
+                                (builder: (BuildContext context) {
+                                return
+                                  LoginScreen();
+                              }));
+                            },
                             child: Text(
                               "Entre ou cadastre-se",
                               style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
+                                  color: Theme
+                                      .of(context)
+                                      .primaryColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
                             ),
