@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_virtual/datas/product_data.dart';
 import 'package:loja_virtual/tiles/product_tile.dart';
+import 'package:loja_virtual/widgets/cart_button.dart';
 
 class ProductsScreen extends StatelessWidget {
   final DocumentSnapshot snapshot;
@@ -28,6 +29,8 @@ class ProductsScreen extends StatelessWidget {
               ],
             ),
           ),
+
+          floatingActionButton: CartButton(),
           body: FutureBuilder<QuerySnapshot>(
             future: Firestore.instance
                 .collection("products")
@@ -45,10 +48,10 @@ class ProductsScreen extends StatelessWidget {
                     GridView.builder(
                       padding: EdgeInsets.all(4),
                       itemBuilder: (BuildContext context, int index) {
-                        return ProductTile(
-                            "grid",
-                            ProductData.fromDocument(
-                                snapshot.data.documents[index]));
+                        ProductData data = ProductData.fromDocument(
+                            snapshot.data.documents[index]);
+                        data.category = this.snapshot.documentID;
+                        return ProductTile("grid", data);
                       },
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -62,11 +65,10 @@ class ProductsScreen extends StatelessWidget {
                       padding: EdgeInsets.all(4.0),
                       itemCount: snapshot.data.documents.length,
                       itemBuilder: (context, index) {
-                        return ProductTile(
-                          "list",
-                          ProductData.fromDocument(
-                              snapshot.data.documents[index]),
-                        );
+                        ProductData data = ProductData.fromDocument(
+                            snapshot.data.documents[index]);
+                        data.category = this.snapshot.documentID;
+                        return ProductTile("list", data);
                       },
                     )
                   ],
