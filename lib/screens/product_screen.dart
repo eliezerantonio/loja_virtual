@@ -1,6 +1,11 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:loja_virtual/datas/cart_productt.dart';
 import 'package:loja_virtual/datas/product_data.dart';
+import 'package:loja_virtual/models/cart_model.dart';
+import 'package:loja_virtual/models/user_model.dart';
+import 'package:loja_virtual/screens/cart_screen.dart';
+import 'package:loja_virtual/screens/login_screen.dart';
 
 class ProductScreen extends StatefulWidget {
   ProductScreen(this.product);
@@ -112,9 +117,36 @@ class _ProductScreenState extends State<ProductScreen> {
                     child: RaisedButton(
                       color: primaryColor,
                       textColor: Colors.white,
-                      onPressed: this.size != null ? () {} : null,
+                      onPressed: this.size != null
+                          ? () {
+                              if (UserModel.of(context).isLoggedIn()) {
+                                //Adicionar ao carrinho
+                                CartProduct cartProduct = CartProduct();
+                                cartProduct.size = this.size;
+                                cartProduct.quantity = 1;
+                                cartProduct.pid=product.id;
+                                cartProduct.category=product.category;
+
+                                CartModel.of(context).addCartItem(cartProduct);
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => CartScreen(),
+                                  ),
+                                );
+                              } else {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginScreen(),
+                                  ),
+                                );
+                              }
+                            }
+                          : null,
                       child: Text(
-                        "Adicionar ao carrinho",
+                        UserModel.of(context).isLoggedIn()
+                            ? "Adicionar ao "
+                                "carrinho"
+                            : "Entre para comprar",
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
@@ -130,7 +162,10 @@ class _ProductScreenState extends State<ProductScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Text(product.description, style: TextStyle(fontSize: 18),)
+                Text(
+                  product.description,
+                  style: TextStyle(fontSize: 18),
+                )
               ],
             ),
           )
