@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:loja_virtual/models/user_model.dart';
 import 'package:loja_virtual/screens/login_screen.dart';
 import 'package:loja_virtual/tiles/drawer_tile.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class CustomDrawer extends StatelessWidget {
   CustomDrawer(this.pageController);
 
   final PageController pageController;
 
-  Widget _buildDrawerBack() =>
-      Container(
+  Widget _buildDrawerBack() => Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Color.fromARGB(255, 203, 236, 241), Colors.white70,],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter),
+          gradient: LinearGradient(colors: [
+            Color.fromARGB(255, 203, 236, 241),
+            Colors.white70,
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
       );
 
@@ -43,37 +44,49 @@ class CustomDrawer extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: 0,
-                      bottom: 0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Olá, ",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute
-                                (builder: (BuildContext context) {
-                                return
-                                  LoginScreen();
-                              }));
-                            },
-                            child: Text(
-                              "Entre ou cadastre-se",
-                              style: TextStyle(
-                                  color: Theme
-                                      .of(context)
-                                      .primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
+                        left: 0,
+                        bottom: 0,
+                        child: ScopedModelDescendant<UserModel>(
+                          builder: (context, child, model) {
+                            print(model.userData["name"]);
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Olá,${!model.isLoggedIn() ? "" : model.userData["name"]}",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    if (!model.isLoggedIn())
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) {
+                                            return LoginScreen();
+                                          },
+                                        ),
+                                      );
+                                    else{
+                                      model.signOut();
+                                    }
+                                  },
+                                  child: Text(
+                                    !model.isLoggedIn()
+                                        ? "Entre ou "
+                                            "cadastre-se"
+                                        : "Sair",
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  ),
+                                )
+                              ],
+                            );
+                          },
+                        ))
                   ],
                 ),
               ),
