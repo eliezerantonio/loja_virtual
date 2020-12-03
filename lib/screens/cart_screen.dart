@@ -3,7 +3,12 @@ import 'package:loja_virtual/models/cart_model.dart';
 import 'package:loja_virtual/models/user_model.dart';
 import 'package:loja_virtual/screens/login_screen.dart';
 import 'package:loja_virtual/tiles/cart_tile.dart';
+import 'package:loja_virtual/widgets/cart_price.dart';
+import 'package:loja_virtual/widgets/discount_card.dart';
+import 'package:loja_virtual/widgets/ship_card.dart';
 import 'package:scoped_model/scoped_model.dart';
+
+import 'order_screen.dart';
 
 class CartScreen extends StatelessWidget {
   @override
@@ -31,7 +36,9 @@ class CartScreen extends StatelessWidget {
         builder: (context, child, model) {
           if (model.isLoading && UserModel.of(context).isLoggedIn()) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.green,
+              ),
             );
           } else if (!UserModel.of(context).isLoggedIn()) {
             return Container(
@@ -55,9 +62,7 @@ class CartScreen extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
+                  SizedBox(height: 16),
                   RaisedButton(
                     child: Text(
                       "Entrar",
@@ -90,7 +95,16 @@ class CartScreen extends StatelessWidget {
                   children: model.products
                       .map((product) => CartTile(product))
                       .toList(),
-                )
+                ),
+                DiscountCard(),
+                ShipCard(),
+                CartPrice(() async {
+                  String orderId = await model.finishOrder();
+
+                  if (orderId != null)
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => OrderScreen(orderId)));
+                })
               ],
             );
           }
