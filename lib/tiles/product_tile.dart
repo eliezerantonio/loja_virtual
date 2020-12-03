@@ -39,7 +39,7 @@ class ProductTile extends StatelessWidget {
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            "kz ${product.price.toStringAsFixed(2)}",
+                            "KZ ${product.price.toStringAsFixed(2)}",
                             style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 17,
@@ -77,7 +77,7 @@ class ProductTile extends StatelessWidget {
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            "kz ${product.price.toStringAsFixed(2)}",
+                            "KZ ${product.price.toStringAsFixed(2)}",
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontSize: 17,
